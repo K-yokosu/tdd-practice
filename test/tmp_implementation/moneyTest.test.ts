@@ -1,6 +1,6 @@
 import { Dollar } from "../../src/tmp_implementation/moneyTest";
 
-describe("Dollar", () => {
+describe("MeneyTest", () => {
     it("testMultiplication", () => {
         const five = new Dollar(5);
         let product: number = five.times(2);
