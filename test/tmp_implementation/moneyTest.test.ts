@@ -3,7 +3,9 @@ import { Dollar } from "../../src/tmp_implementation/moneyTest";
 describe("Dollar", () => {
     it("testMultiplication", () => {
         const five = new Dollar(5);
-        five.times(2);
-        expect(five.amount).toEqual(10);
+        let product: number = five.times(2);
+        expect(product).toEqual(10);
+        product = five.times(3);
+        expect(product).toEqual(15);
     });
 });
