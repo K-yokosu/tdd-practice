@@ -8,4 +8,9 @@ describe("MeneyTest", () => {
         product = five.times(3);
         expect(product).toEqual(15);
     });
+    it("testEquality", () => {
+        const five = new Dollar(5);
+        expect(five.equals(new Dollar(5))).toBeTruthy();
+        expect(five.equals(new Dollar(6))).not.toBeTruthy();
+    });
 });
