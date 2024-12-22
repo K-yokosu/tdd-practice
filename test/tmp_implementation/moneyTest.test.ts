@@ -1,9 +1,11 @@
-import { MoneyTest } from "../../src/tmp_implementation/moneyTest";
+import { Dollar } from "../../src/tmp_implementation/moneyTest";
 
-describe("MoneyTest", () => {
+describe("Dollar", () => {
     it("testMultiplication", () => {
-        const moneyTest = new MoneyTest();
-        moneyTest.testMultiplication();
-        expect(moneyTest.five.amount).toEqual(10);
+        const five = new Dollar(5);
+        let product: number = five.times(2);
+        expect(product).toEqual(10);
+        product = five.times(3);
+        expect(product).toEqual(15);
     });
 });
