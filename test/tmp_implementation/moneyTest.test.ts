@@ -1,4 +1,4 @@
-import { Dollar } from "../../src/tmp_implementation/moneyTest";
+import { Dollar, Franc } from "../../src/tmp_implementation/moneyTest";
 
 describe("MeneyTest", () => {
     it("testMultiplication", () => {
@@ -10,5 +10,10 @@ describe("MeneyTest", () => {
         const five = new Dollar(5);
         expect(five.equals(new Dollar(5))).toBeTruthy();
         expect(five.equals(new Dollar(6))).not.toBeTruthy();
+    });
+    it("testFrancMultiplication", () => {
+        const five = new Franc(5);
+        expect(new Franc(10).getAmount()).toEqual(five.times(2));
+        expect(new Franc(15).getAmount()).toEqual(five.times(3));
     });
 });
