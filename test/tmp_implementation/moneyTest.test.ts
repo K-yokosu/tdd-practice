@@ -13,6 +13,7 @@ describe("MeneyTest", () => {
         const five_f = new Franc(5);
         expect(five_f.equals(new Franc(5))).toBeTruthy();
         expect(five_f.equals(new Franc(6))).not.toBeTruthy();
+        expect(five.equals(new Franc(5))).not.toBeTruthy();
     });
     it("testFrancMultiplication", () => {
         const five = new Franc(5);
