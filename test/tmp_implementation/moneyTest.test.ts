@@ -10,6 +10,9 @@ describe("MeneyTest", () => {
         const five = new Dollar(5);
         expect(five.equals(new Dollar(5))).toBeTruthy();
         expect(five.equals(new Dollar(6))).not.toBeTruthy();
+        const five_f = new Franc(5);
+        expect(five_f.equals(new Franc(5))).toBeTruthy();
+        expect(five_f.equals(new Franc(6))).not.toBeTruthy();
     });
     it("testFrancMultiplication", () => {
         const five = new Franc(5);

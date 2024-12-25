@@ -1,31 +1,30 @@
-export class Dollar {
-    private amount: number;
+class Money {
+    protected amount: number;
+
     constructor(amount: number) {
         this.amount = amount;
     }
-    times(multiplier: number) {
-        return this.amount * multiplier;
-    }
-    equals(obj: Dollar) {
+    equals(obj: Money) {
         return this.amount === obj.amount;
     }
     getAmount(): number {
         return this.amount;
     }
 }
-
-export class Franc {
-    private amount: number;
+export class Dollar extends Money {
     constructor(amount: number) {
-        this.amount = amount;
+        super(amount);
     }
     times(multiplier: number) {
         return this.amount * multiplier;
+    }    
+}
+
+export class Franc extends Money {
+    constructor(amount: number) {
+        super(amount);
     }
-    equals(obj: Franc) {
-        return this.amount === obj.amount;
-    }
-    getAmount(): number {
-        return this.amount;
+    times(multiplier: number) {
+        return this.amount * multiplier;
     }
 }
