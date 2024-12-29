@@ -1,4 +1,4 @@
-import { Money, Dollar, Franc } from "../../src/tmp_implementation/moneyTest";
+import { Money } from "../../src/tmp_implementation/moneyTest";
 
 describe("MeneyTest", () => {
     it("testMultiplication", () => {
@@ -19,5 +19,9 @@ describe("MeneyTest", () => {
         const five = Money.franc(5);
         expect(Money.franc(10).getAmount()).toEqual(five.times(2));
         expect(Money.franc(15).getAmount()).toEqual(five.times(3));
+    });
+    it("testCurrency", () => {
+        expect("USD").toEqual(Money.dollar(1).currency());
+        expect("CHF").toEqual(Money.franc(1).currency());
     });
 });
