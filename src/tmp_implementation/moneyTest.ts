@@ -1,31 +1,34 @@
-class Money {
+export class Money {
     protected amount: number;
+    protected currency_kind: string = "";
 
-    constructor(amount: number) {
+    constructor(amount: number, currency_kind: string) {
         this.amount = amount;
+        this.currency_kind = currency_kind;
+    }
+
+    currency(): string {
+        return this.currency_kind;
     }
     equals(obj: Money) {
-        return this.amount === obj.amount && this.constructor.name === obj.constructor.name;
+        return this.amount === obj.amount && this.currency_kind === obj.currency_kind;
     }
     getAmount(): number {
         return this.amount;
     }
-}
-
-export class Dollar extends Money {
-    constructor(amount: number) {
-        super(amount);
-    }
     times(multiplier: number) {
-        return this.amount * multiplier;
-    }    
+        return new Money(this.amount * multiplier, this.currency_kind);
+    }
+    static dollar(amount: number) {
+        return new Money(amount, "USD");
+    }
+    static franc(amount: number) {
+        return new Money(amount, "CHF");
+    }
 }
 
 export class Franc extends Money {
-    constructor(amount: number) {
-        super(amount);
-    }
-    times(multiplier: number) {
-        return this.amount * multiplier;
+    constructor(amount: number, currency_kind: string) {
+        super(amount, currency_kind);
     }
 }
