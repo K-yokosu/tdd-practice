@@ -1,4 +1,4 @@
-export abstract class Money {
+export class Money {
     protected amount: number;
     protected currency_kind: string = "";
 
@@ -11,13 +11,13 @@ export abstract class Money {
         return this.currency_kind;
     }
     equals(obj: Money) {
-        return this.amount === obj.amount && this.constructor.name === obj.constructor.name;
+        return this.amount === obj.amount && this.currency_kind === obj.currency_kind;
     }
     getAmount(): number {
         return this.amount;
     }
     times(multiplier: number) {
-        return this.amount * multiplier;
+        return new Money(this.amount * multiplier, this.currency_kind);
     }
     static dollar(amount: number) {
         return new Dollar(amount, "USD");
