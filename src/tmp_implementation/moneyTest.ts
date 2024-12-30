@@ -20,16 +20,10 @@ export class Money {
         return new Money(this.amount * multiplier, this.currency_kind);
     }
     static dollar(amount: number) {
-        return new Dollar(amount, "USD");
+        return new Money(amount, "USD");
     }
     static franc(amount: number) {
-        return new Franc(amount, "CHF");
-    }
-}
-
-export class Dollar extends Money {
-    constructor(amount: number, currency_kind: string) {
-        super(amount, currency_kind);
+        return new Money(amount, "CHF");
     }
 }
 
