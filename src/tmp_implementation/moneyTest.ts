@@ -1,4 +1,6 @@
-export interface Expression {}
+export interface Expression {
+    reduce(to: string): Money;
+}
 
 export class Money implements Expression {
     protected amount: number;
@@ -7,6 +9,10 @@ export class Money implements Expression {
     constructor(amount: number, currency_kind: string) {
         this.amount = amount;
         this.currency_kind = currency_kind;
+    }
+
+    public reduce(to: string) {
+        return this;
     }
 
     currency(): string {
@@ -22,7 +28,8 @@ export class Money implements Expression {
         return new Money(this.amount * multiplier, this.currency_kind);
     }
     plus(addend: Money): Expression {
-        return new Money(this.amount + addend.amount, this.currency_kind);
+        // return new Money(this.amount + addend.amount, this.currency_kind);
+        return new Sum(this, addend);
     }
     static dollar(amount: number) {
         return new Money(amount, "USD");
@@ -34,6 +41,22 @@ export class Money implements Expression {
 
 export class Bank {
     reduce(source: Expression, to: string) {
-        return Money.dollar(10);
+        return source.reduce(to);
     }
+}
+
+export class Sum implements Expression {
+    augend: Money;
+    addend: Money;
+
+    constructor(augend: Money, addend: Money) {
+        this.augend = augend;
+        this.addend = addend;
+    }
+
+    public reduce(to: string) {
+        const amount: number = this.augend.getAmount() + this.addend.getAmount();
+        return new Money(amount, to);
+    }
+
 }
