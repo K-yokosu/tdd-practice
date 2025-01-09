@@ -1,4 +1,4 @@
-import { Money } from "../../src/tmp_implementation/moneyTest";
+import { Money, Bank, Expression, Sum } from "../../src/tmp_implementation/moneyTest";
 
 describe("MeneyTest", () => {
     it("testMultiplication", () => {
@@ -15,5 +15,41 @@ describe("MeneyTest", () => {
     it("testCurrency", () => {
         expect("USD").toEqual(Money.dollar(1).currency());
         expect("CHF").toEqual(Money.franc(1).currency());
+    });
+    it("testSimpleAddition", () => {
+        const five: Money = Money.dollar(5);
+        const sum: Expression = five.plus(five);
+        const bank: Bank = new Bank();
+        const reduced: Money = bank.reduce(sum, "USD");
+        expect(Money.dollar(10)).toEqual(reduced);
+    });
+    it("testPlusReturnsSum", () => {
+        const five: Money = Money.dollar(5);
+        const result: Expression = five.plus(five);
+        const sum: Sum = result as Sum;
+        expect(five).toEqual(sum.augend);
+        expect(five).toEqual(sum.addend);
+    });
+    it("testReduceSum", () => {
+        const sum: Expression = new Sum(Money.dollar(3), Money.dollar(4));
+        const bank: Bank = new Bank();
+        const result: Money = bank.reduce(sum, "USD");
+        expect(Money.dollar(7)).toEqual(result);
+    });
+    it("testReduceMoney", () => {
+        const bank: Bank = new Bank();
+        const result: Money = bank.reduce(Money.dollar(1), "USD");
+        expect(Money.dollar(1)).toEqual(result);
+    });
+    it("testReduceMoneyDifferentCurrency", () => {
+        const bank: Bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        const result: Money = bank.reduce(Money.franc(2), "USD");
+        // expect(Money.dollar(1)).toEqual(result);
+        // console.log(result)
+        // console.log(Money.dollar(1))
+    });
+    it("testIdentityRate", () => {
+        expect(new Bank().rate("USD", "USD")).toEqual(1);
     });
 });
